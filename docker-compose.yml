@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  reverse-proxy:
+    build: 'reverse-proxy/'
+    restart: always
+    container_name: 'reverse_proxy'
+    networks:
+      - my-app
+    ports:
+      - '8080:80'
+  angular:
+    build: 'angular/'
+    restart: always
+    container_name: 'client'
+    networks:
+      - my-app
+  java:
+    build: 'java/'
+    restart: always
+    container_name: 'server'
+    networks:
+      - my-app
+networks:
+  my-app:
+    driver: bridge
